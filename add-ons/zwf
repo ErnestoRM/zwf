@@ -1,0 +1,6 @@
+<?php
+
+    include("base/zfx/console/Cli.php");
+
+    $console = new \zfx\Cli($argv);
+    $console->run();
