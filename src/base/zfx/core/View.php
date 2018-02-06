@@ -244,6 +244,9 @@ class View
             $path = Config::get('basePath') . $fields[1] . '/views/' . $name . '.php';
         } else {
             $path = Config::get('viewPath') . $name . '.php';
+            if (!file_exists($path)) {
+                $path = Config::get('viewRootPath') . $name . '.php';
+            }
         }
         if (file_exists($path)) {
             return $path;

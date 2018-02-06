@@ -148,7 +148,7 @@ function getController($string)
  */
 function validSegment($string)
 {
-    if (preg_match('/^[0-9a-z](?:[-0-9a-z]*?[0-9a-z])?$/u', $string) == 1) {
+    if (preg_match('/^[0-9a-zA-Z](?:[-0-9a-zA-Z]*?[0-9a-zA-Z])?$/u', $string) == 1) {
         return true;
     } else {
         return false;
@@ -236,6 +236,44 @@ function _loadClass($className)
         require_once($file);
     }
 }
+
+/**
+ * Descripción: returns last key in array
+ *
+ * @param $array
+ *
+ * @return int|null|string
+ *
+ *
+ * @author Ernesto Roselló  ernesto@activexsoft.es
+ */
+function lastKey($array)
+{
+    end($array);
+
+    return key($array);
+}
+// --------------------------------------------------------------------
+/**
+ * Descripción: Load model class
+ *
+ * @param $className
+ *
+ *
+ * @author Ernesto Roselló  ernesto@activexsoft.es
+ */
+function loadModel($className)
+{
+
+    $file = Config::get('modelPath') . Config::get('dbSys') . DIRECTORY_SEPARATOR . $className . '.php';
+
+    if (file_exists($file)) {
+
+        require_once $file;
+    }
+}
+// --------------------------------------------------------------------
+
 spl_autoload_register('\\zfx\\_loadClass');
 
 

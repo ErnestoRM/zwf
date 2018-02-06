@@ -226,4 +226,24 @@ class Controller
 
     // --------------------------------------------------------------------
 
+
+
+
+
+    public function _breadcrumbs()
+    {
+
+        $request = explode("/", $_GET['_seg']);
+        $breadcrums["home"] = Config::get('rootUrl');
+        $path = $this->_urlController();
+        $path = substr($path, 0, -1);
+        $breadcrums[$request[0]] = $path;
+        unset($request[0]);
+        foreach ($request as $segment) {
+            $path .= DIRECTORY_SEPARATOR . $segment;
+            $breadcrums[$segment] = $path;
+        }
+        return $breadcrums;
+    }
+    // --------------------------------------------------------------------
 }

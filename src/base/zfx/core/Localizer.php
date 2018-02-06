@@ -110,7 +110,7 @@ class Localizer
     public function getDate(\DateTime $value = NULL)
     {
         if (!$value instanceof \DateTime) {
-            return NULL;
+            //
         } else {
             return $value->format($this->langInfo['date']);
         }

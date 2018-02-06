@@ -40,7 +40,7 @@
  */
 
 // Default database engine
-$cfg['dbSys'] = 'pg';
+$cfg['dbSys'] = 'my';
 
 // Default connection profile
 $cfg['dbProfile'] = 'default';
@@ -60,12 +60,12 @@ $cfg['pg'] = array(
 // MySQL profiles
 $cfg['my'] = array(
     'default' => array(
-        'dbHost'     => '',
-        'dbUser'     => '',
-        'dbPass'     => '',
-        'dbDatabase' => '',
+        'dbHost'     => 'localhost',
+        'dbPass'     => 'XXXXXXX',
+        'dbUser'     => 'XXXXXXX',
+        'dbDatabase' => 'world',
         'dbPort'     => '3306'
-    )
+    ),
 );
 
 

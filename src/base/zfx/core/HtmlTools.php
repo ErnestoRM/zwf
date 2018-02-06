@@ -96,7 +96,7 @@ class HtmlTools
 
     // --------------------------------------------------------------------
 
-    public static function array2table(array $data = null, $tableClass = '', array $labels = null, $style = '')
+    public static function array2table(array $data = null, $tableClass = '', $tableId = '', array $labels = null, $style = '')
     {
         if (!va($data)) {
             return;
@@ -105,7 +105,7 @@ class HtmlTools
         if (!trueEmpty($style)) {
             $style = 'style="' . $style . '" ';
         }
-        $code = "<table class=\"$tableClass\" $style>";
+        $code = "<table id=\"$tableId\" class=\"$tableClass\" $style>";
         $code .= '<thead>';
         reset($data);
         $firstRow = current($data);
@@ -142,4 +142,25 @@ class HtmlTools
     }
 
     // --------------------------------------------------------------------
+
+    public static function array2list(array $data = null, $listClass = '', array $labels = null, $style = '')
+    {
+        if (!va($data)) {
+            return;
+        }
+
+        if (!trueEmpty($style)) {
+            $style = 'style="' . $style . '" ';
+        }
+        $code = "<ul class =\"$listClass\" $style>";
+        foreach ($data as $key => $value) {
+            $code .= "<li>";
+            $code .= "<a href=\"http://$value \">
+                    $key
+             </a>
+            </li>";
+        }
+        $code .= "</ul>";
+        return $code;
+    }
 }

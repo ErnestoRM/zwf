@@ -34,6 +34,7 @@
  * @package core
  */
 // Load config and set things up
+//@session_start();
 require('base/zfx/core/Config.php');
 \zfx\Config::setup();
 // Load core code (basic functions, class autoloading...)

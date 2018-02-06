@@ -59,7 +59,7 @@ $cfg['timeZone'] = 'Europe/Madrid';
 // System behavior settings
 // --------------------------------------------------------------------
 // Show PHP errors
-$cfg['showErrors'] = false;
+$cfg['showErrors'] = true;
 
 // Default init function to be called when load controller
 $cfg['defaultControllerInitFunction'] = '_init';
@@ -76,6 +76,8 @@ $cfg['fallbackController'] = '';
 // zfx is default namespace
 $cfg['zfxNamespace'] = false;
 
+// Prefix in model names
+$cfg['modelPrefix'] = "M";
 
 // --------------------------------------------------------------------
 // Configuration auto-load
@@ -89,7 +91,7 @@ $cfg['autoLoadConfig'] = null;
 // --------------------------------------------------------------------
 
 $cfg['enabledModules'] = array(
-    'zfx' => array('core', 'dev', 'data-access')
+    'zfx' => array('core', 'dev', 'data-access', 'app', 'data-model'),
 );
 
 // --------------------------------------------------------------------

@@ -64,22 +64,36 @@ class DB extends \mysqli
      */
     public function __construct($profile = null)
     {
-        if ($profile == NULL | trueEmpty($profile)) {
-            $profile = Config::get('dbProfile');
+        //Si recibimos vacío y existe SESSION->profile, éste será el perfil
+        if ($profile == null) {
+
+            if (va($_SESSION['profile'])) {
+                $profile = $_SESSION['profile'];
+            } else {
+                //si no existe, el perfil será el definido por defecto
+                $profile = Config::get('dbProfile');
+            }
+        }
+        //Si aún no hemos asignado un array al perfil, es que debemos rescatarlo del fichero de configuración
+        if (!va($profile)) {
+            $profile = a(Config::get('my'), $profile);
         }
 
-        if (!a(Config::get('my'), $profile)) {
+        //A estas alturas ya debería ser un array
+        if (va($profile)) {
+
+            parent::__construct('p:' . a($profile, 'dbHost'), a($profile, 'dbUser'), a($profile, 'dbPass'), a($profile, 'dbDatabase'), a($profile, 'dbPort'));
+        } else {
             Debug::devError("Unknown DB profile: '$profile'.");
         }
 
-        parent::__construct('p:' . a(a(Config::get('my'), $profile), 'dbHost'), a(a(Config::get('my'), $profile), 'dbUser'), a(a(Config::get('my'), $profile), 'dbPass'), a(a(Config::get('my'), $profile), 'dbDatabase'), a(a(Config::get('my'), $profile), 'dbPort'));
         if ($this->connect_error) {
             $errorCode = $this->connect_errno;
             $errorText = $this->connect_error;
             Debug::devError("MySQL connection error: (# $errorCode) '$errorText'");
         }
         $this->set_charset('utf8');
-        $this->ignoreErrors = (bool) a(a(Config::get('my'), $profile), 'ignoreErrors');
+        $this->ignoreErrors = (bool) a($profile, 'ignoreErrors');
         $this->clearLastRes();
     }
     // --------------------------------------------------------------------
